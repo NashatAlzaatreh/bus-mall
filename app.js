@@ -40,20 +40,34 @@ function generateRandomIndex() {
 let leftIndex;
 let centerIndex;
 let rightIndex;
+// check index
+let checkRepeatleft;
+let checkRepeatCenter;
+let checkRepeatRight;
+
 
 function renderThreeImeges() {
+
     leftIndex = generateRandomIndex();
     centerIndex = generateRandomIndex();
     rightIndex = generateRandomIndex();
-    
-    // sure it's not equales 
-    while (leftIndex === centerIndex || leftIndex === rightIndex || centerIndex === rightIndex) {
+
+
+
+    // sure it's not equales and not repets
+    while (leftIndex === centerIndex || leftIndex === rightIndex || centerIndex === rightIndex || leftIndex === checkRepeatleft || leftIndex === checkRepeatCenter || leftIndex === checkRepeatRight || centerIndex === checkRepeatCenter || centerIndex === checkRepeatleft || centerIndex === checkRepeatRight || rightIndex === checkRepeatRight || rightIndex === checkRepeatleft || rightIndex === checkRepeatCenter) {
         leftIndex = generateRandomIndex();
         centerIndex = generateRandomIndex();
+        rightIndex = generateRandomIndex();
+
+
     }
-    // console.log(leftIndex);
-    // console.log(centerIndex);
-    // console.log(rightIndex);
+
+    console.log('after check', leftIndex, centerIndex, rightIndex);
+    checkRepeatleft = leftIndex;
+    checkRepeatCenter = centerIndex;
+    checkRepeatRight = rightIndex;
+
 
     // make images appears in the web page
 
@@ -67,12 +81,13 @@ renderThreeImeges();
 
 //  click images 
 
-leftImageElemanet.addEventListener ('click', handelClick); 
-centerImageElemanet.addEventListener ('click', handelClick);
-rightImageElemanet.addEventListener ('click', handelClick); 
-
-function handelClick (event){
-    counter++ ; 
+let section = document.getElementById('sec-one')
+// leftImageElemanet.addEventListener('click', handelClick);
+// centerImageElemanet.addEventListener('click', handelClick);
+// rightImageElemanet.addEventListener('click', handelClick);
+section.addEventListener('click', handelClick);
+function handelClick(event) {
+    counter++;
 
     if (counter <= maxAttepts) {
         if (event.target.id === 'left-image') {
@@ -84,7 +99,7 @@ function handelClick (event){
             Product.globArr[centerIndex].shown++
             Product.globArr[rightIndex].shown++
         }
-        else if (event.target.id === 'center-image'){
+        else if (event.target.id === 'center-image') {
             Product.globArr[centerIndex].pickNumber++
             // Product.globArr[centerIndex].selected++
             // how much the image shown
@@ -99,14 +114,17 @@ function handelClick (event){
             Product.globArr[leftIndex].shown++
             Product.globArr[centerIndex].shown++
             Product.globArr[rightIndex].shown++
-        }
+        }else{
+            counter --;
+            return
+          }
         // new call to clickable images 
         renderThreeImeges();
 
-    } 
+    }
     else {
         // renderList ();
-        
+
     }
 
 }
@@ -125,22 +143,73 @@ function handelClick (event){
 // }
 
 
-
-const productsListButton  = document.getElementById('submit');
+let shownArr = [];
+let voteArr = [];
+// making the button and the list 
+const productsListButton = document.getElementById('submit');
 productsListButton.addEventListener('click', submitList);
 
-function submitList (event){
+function submitList(event) {
     let ul = document.getElementById('productList');
-        for (let i = 0; i < Product.globArr.length; i++) {
-            let li = document.createElement('li');
-            ul.appendChild(li);
-            li.textContent = `${Product.globArr[i].name} had ${Product.globArr[i].pickNumber} votes, and was seen ${Product.globArr[i].shown} times.`
-        }
-        leftImageElemanet.removeEventListener('click', handelClick);
-        centerImageElemanet.removeEventListener('click', handelClick);
-        rightImageElemanet.removeEventListener('click', handelClick);
-        // see one list
-        productsListButton.removeEventListener('click', submitList);
+    for (let i = 0; i < Product.globArr.length; i++) {
+        let li = document.createElement('li');
+        ul.appendChild(li);
+        li.textContent = `${Product.globArr[i].name} had ${Product.globArr[i].pickNumber} votes, and was seen ${Product.globArr[i].shown} times.`
+        shownArr.push(Product.globArr[i].shown);
+        voteArr.push(Product.globArr[i].pickNumber);
+
+    }
+    console.log(shownArr);
+    console.log(voteArr);
+    makeChart();
+    // leftImageElemanet.removeEventListener('click', handelClick);
+    // centerImageElemanet.removeEventListener('click', handelClick);
+    // rightImageElemanet.removeEventListener('click', handelClick);
+    section.removeEventListener('click', handelClick);
+    // see one list
+    productsListButton.removeEventListener('click', submitList);
 
 }
+// making the chart 
+function makeChart() {
+    let ctx = document.getElementById('myChart').getContext('2d');
+    let myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: productsNames,
+            datasets: [{
+                label: '# of Votes',
+                data: voteArr,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
 
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+
+                ],
+                borderWidth: 1
+            },
+            {
+                label: '# of Shown',
+                data: shownArr,
+                backgroundColor: [
+                    'rgba(100, 200, 200, 0.2)',
+
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+}
