@@ -1,0 +1,115 @@
+
+
+
+header {
+    position: relative;
+    height: 70px;
+    background-color: #FFFBDF;
+
+}
+
+
+header img {
+    position: absolute;
+    width: 80px;
+    top: 10px;
+    left: 10px;
+    
+}
+header h2 {
+    position: absolute;
+    top: 10px;
+    left: 100px;
+    font-size: 45px;
+    color: #334443;
+    
+    margin: 0px;
+}
+
+main {
+    position: relative;
+    background-color: #C6FFC1;
+    height: 1200px;
+}
+#pickH2 {
+    
+    font-size: 30px;
+    color: #FFFBDF;
+    text-align: center;
+    padding: 12.5px 0px 12.5px 0px;
+    width: 100%;
+    background-color: #34656D;
+}
+
+#pickH3 {
+    font-size: 25px;
+   margin-left: 450px;
+   margin-top: 15px;
+
+}
+
+#sec-one img {
+    margin: 25px;
+    
+    height: 250px;
+}
+#sec-one {
+    position: absolute;
+    top: 100px;
+    right: 25px;
+    border: solid #FFFBDF 10px;
+    background-color: #34656D;
+}
+
+input{
+    position: absolute;
+    top: 430px;
+    right: 170px;
+    font-size: 25px;
+    background-color:#34656D ;
+    color: #FFFBDF;
+}
+
+input:hover {
+    background-color:#c0684d ;
+    color: #FFFBDF;
+}
+
+
+#sec-two {
+    position: absolute; 
+    left: 5px;
+    top: 100px;
+    border: solid #FFFBDF 10px;
+    width: 395px;
+    height: 385px;
+    font-size: 20px;
+    
+    
+}
+li{
+    list-style-type: disc;
+    
+    }
+    ul{
+        position: absolute;
+        left: 25px;
+    }
+  
+
+#myChart {
+    position: absolute; 
+    top: 450px;
+    height: 100%;
+    width: 100%;
+    max-width: 1000px;
+    max-height: 600px;
+    right: 50px;
+}
+
+
+footer{
+    position: relative;
+    height: 70px;
+    background-color: #34656D;
+}

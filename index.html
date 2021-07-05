@@ -7,15 +7,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BusMall</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="reset.css">
 </head>
 
 <body>
     <header>
+        <img src="https://www.beastmobgymgear.com/wp-content/uploads/2020/11/BM-logo.png" alt="Logo">
         <h2>
-            Pick your favorite product
+            BusMall
         </h2>
     </header>
     <main>
+        <h2 id="pickH2">
+            Pick your favorite product
+        </h2>
+        <h3 id="pickH3">Select your favorite product from the three products shown at every iteration, then click <font style="color: rgb(219, 90, 90);">View Results</font> </h3>
         <section id="sec-one">
             <img src="" alt="" id="left-image" width="300px">
             <img src="" alt="" id="center-image" width="300px">
@@ -25,6 +31,10 @@
         <div class="submitDiv">
             <input id="submit" type="submit" value="View Results">
         </div>
+        <div>
+            <canvas id="myChart" width="150" height="150"></canvas>
+
+        </div>
         <section id="sec-two">
             <ul id="productList"></ul>
         </section>
@@ -33,6 +43,7 @@
     <footer>
 
     </footer>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <script src="app.js"></script>
 </body>
