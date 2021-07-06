@@ -63,7 +63,7 @@ function renderThreeImeges() {
 
     }
 
-    console.log('after check', leftIndex, centerIndex, rightIndex);
+    // console.log('after check', leftIndex, centerIndex, rightIndex);
     checkRepeatleft = leftIndex;
     checkRepeatCenter = centerIndex;
     checkRepeatRight = rightIndex;
@@ -82,18 +82,16 @@ renderThreeImeges();
 //  click images 
 
 let section = document.getElementById('sec-one')
-// leftImageElemanet.addEventListener('click', handelClick);
-// centerImageElemanet.addEventListener('click', handelClick);
-// rightImageElemanet.addEventListener('click', handelClick);
+
 section.addEventListener('click', handelClick);
 function handelClick(event) {
+    // console.log(event);
     counter++;
 
     if (counter <= maxAttepts) {
         if (event.target.id === 'left-image') {
             // how much the image picked
             Product.globArr[leftIndex].pickNumber++
-            // Product.globArr[leftIndex].selected++
             // how much the image shown
             Product.globArr[leftIndex].shown++
             Product.globArr[centerIndex].shown++
@@ -101,7 +99,6 @@ function handelClick(event) {
         }
         else if (event.target.id === 'center-image') {
             Product.globArr[centerIndex].pickNumber++
-            // Product.globArr[centerIndex].selected++
             // how much the image shown
             Product.globArr[leftIndex].shown++
             Product.globArr[centerIndex].shown++
@@ -109,39 +106,43 @@ function handelClick(event) {
         }
         else if (event.target.id === 'right-image') {
             Product.globArr[rightIndex].pickNumber++
-            // Product.globArr[rightIndex].selected++
             // how much the image shown
             Product.globArr[leftIndex].shown++
             Product.globArr[centerIndex].shown++
             Product.globArr[rightIndex].shown++
-        }else{
-            counter --;
+        } else {
+            counter--;
             return
-          }
+        }
+        // save to LS 
+        saveToLs();
         // new call to clickable images 
         renderThreeImeges();
-
-    }
-    else {
-        // renderList ();
 
     }
 
 }
 
+// Local Storage 
 
-// function renderList (){
-//     let ul = document.getElementById('productList');
-//         for (let i = 0; i < Product.globArr.length; i++) {
-//             let li = document.createElement('li');
-//             ul.appendChild(li);
-//             li.textContent = `${Product.globArr[i].name} had ${Product.globArr[i].pickNumber} votes, and was seen ${Product.globArr[i].shown} times.`
-//         }
-//         leftImageElemanet.removeEventListener('click', handelClick);
-//         centerImageElemanet.removeEventListener('click', handelClick);
-//         rightImageElemanet.removeEventListener('click', handelClick);
-// }
+function saveToLs() {
+    // convert arr of objects
+    const convertedArr = JSON.stringify(Product.globArr)
+    localStorage.setItem('products', convertedArr);
 
+}
+function getFromLs() {
+    const data = localStorage.getItem('products')
+    // console.log(data);
+    const parsedProducts = JSON.parse(data)
+    if (parsedProducts !== null) {
+        console.log(parsedProducts);
+        Product.globArr = parsedProducts;
+        renderThreeImeges();
+
+    }
+
+}
 
 let shownArr = [];
 let voteArr = [];
@@ -159,12 +160,9 @@ function submitList(event) {
         voteArr.push(Product.globArr[i].pickNumber);
 
     }
-    console.log(shownArr);
-    console.log(voteArr);
+    // console.log(shownArr);
+    // console.log(voteArr);
     makeChart();
-    // leftImageElemanet.removeEventListener('click', handelClick);
-    // centerImageElemanet.removeEventListener('click', handelClick);
-    // rightImageElemanet.removeEventListener('click', handelClick);
     section.removeEventListener('click', handelClick);
     // see one list
     productsListButton.removeEventListener('click', submitList);
@@ -213,3 +211,6 @@ function makeChart() {
         }
     });
 }
+
+
+getFromLs();
