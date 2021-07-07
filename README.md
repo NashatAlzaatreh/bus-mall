@@ -1,1 +1,3 @@
-# bus-mall
+# bus-mall 
+### This application is a helpful tool for the sales team in BusMall, it gives him a chart, it's values from customers voting for there favorite product, apperas randomly, and every time we give the customers three randomly products to choose there favorite one, and we give them a 25 alternative
+### All customer choices represent in a chart shows number of votes and number of shown for every product 
