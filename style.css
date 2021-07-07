@@ -52,18 +52,38 @@ main {
     margin: 25px;
     
     height: 250px;
+    transition-property: opacity; 
+    opacity: 0.8;
 }
+
+#sec-one img:hover {
+    transform: scale(1.1);
+    transition-duration: 0.4s;
+    transition-timing-function: linear;
+    border-radius: 30% ;
+    transition-property: opacity; 
+    opacity: 1;
+    transition-property: border;
+    border: 2px solid yellow;
+    
+}
+
+
+
+
 #sec-one {
     position: absolute;
     top: 100px;
-    right: 25px;
+    right: 5px;
     border: solid #FFFBDF 10px;
     background-color: #34656D;
+    width: 1080px;
+    height: 310px;
 }
 
 input{
     position: absolute;
-    top: 430px;
+    top: 440px;
     right: 170px;
     font-size: 25px;
     background-color:#34656D ;
@@ -73,6 +93,7 @@ input{
 input:hover {
     background-color:#c0684d ;
     color: #FFFBDF;
+    transform: scale(1.1);
 }
 
 
@@ -99,7 +120,7 @@ li{
 
 #myChart {
     position: absolute; 
-    top: 450px;
+    top: 480px;
     height: 100%;
     width: 100%;
     max-width: 1000px;
